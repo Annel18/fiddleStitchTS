@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export default function OrganiserBox() {
-    const groups = []
-    const favourites = []
+    const groups: any[] = []
+    const favourites: any[] = []
 
     return (
         <section className='stitchBox-container'>
