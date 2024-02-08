@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState, useEffect } from 'react'
 
-interface Cell {
-    cellIndex: number;
-    logo: string;
-}
-
-const Grid: React.FC = () => {
+export default function Grid() {
+    
+    interface Cell {
+        cellIndex: number
+        logo: string
+    }
     const [width, setWidth] = useState<number>(20)
     const [height, setHeight] = useState<number>(20)
     const [cells, setCells] = useState<JSX.Element[]>([])
@@ -19,7 +19,7 @@ const Grid: React.FC = () => {
             for (let i = 0; i < height; i++) {
                 for (let j = 0; j < width; j++) {
                     const cellIndex = i * width + j
-                    const cellLogo = clickedCells.find((cell) => cell.cellIndex === cellIndex)?.logo; // Get logo for this cell if it exists
+                    const cellLogo = clickedCells.find((cell) => cell.cellIndex === cellIndex)?.logo // Get logo for this cell if it exists
                     grid.push(
                         <div
                             key={cellIndex}
@@ -37,14 +37,14 @@ const Grid: React.FC = () => {
                             {cellLogo && <img src={cellLogo} alt="svg" style={{ width: '100%', height: '100%' }} />}
                             {/* Optionally add content inside each cell */}
                         </div>
-                    );
+                    )
                 }
             }
-            setCells(grid);
+            setCells(grid)
         };
 
         createGrid();
-    }, [width, height, clickedCells]); // Include clickedCells in the dependency array
+    }, [width, height, clickedCells]) // Include clickedCells in the dependency array
 
     const handleCellClick = (cellIndex: number) => {
         // Find the selected logo URL from localStorage
@@ -60,5 +60,3 @@ const Grid: React.FC = () => {
 
     return <div className="grid-container">{cells}</div>
 }
-
-export default Grid
