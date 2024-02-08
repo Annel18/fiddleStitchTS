@@ -1,0 +1,31 @@
+.stitchBox-container {
+    margin: 1rem;
+    width: 18rem;
+    background-color: $primary-fill-color;
+}
+
+.stitchBox {
+    height: calc(100vh - 165px);
+    overflow: scroll;
+    display: flex;
+    flex-direction: column;
+    padding-left: 1rem;
+}
+
+
+.stitches {
+    display: flex;
+    align-items: center;
+    width: calc(100% );
+}
+
+.stitchBoxIcon {
+    max-height: 30px;
+}
+
+.stitchBoxTitle {
+    padding-left: 1rem;
+    font-size: small;
+    text-wrap: nowrap;
+    justify-content: flex-end;
+}
