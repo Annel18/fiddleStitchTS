@@ -1,18 +1,24 @@
-import { useState, useEffect } from 'react';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { useState, useEffect } from 'react'
 
-export default function Grid() {
-    const [width, setWidth] = useState(20);
-    const [height, setHeight] = useState(20);
-    const [cells, setCells] = useState([]);
-    const [clickedCells, setClickedCells] = useState([]);
+interface Cell {
+    cellIndex: number;
+    logo: string;
+}
+
+const Grid: React.FC = () => {
+    const [width, setWidth] = useState<number>(20)
+    const [height, setHeight] = useState<number>(20)
+    const [cells, setCells] = useState<JSX.Element[]>([])
+    const [clickedCells, setClickedCells] = useState<Cell[]>([])
 
     useEffect(() => {
         const createGrid = () => {
-            const grid = [];
-            const cellSize = `${100 / width}%`; // Ensure cells are square
+            const grid: JSX.Element[] = []
+            const cellSize = `${100 / width}%` // Ensure cells are square
             for (let i = 0; i < height; i++) {
                 for (let j = 0; j < width; j++) {
-                    const cellIndex = i * width + j;
+                    const cellIndex = i * width + j
                     const cellLogo = clickedCells.find((cell) => cell.cellIndex === cellIndex)?.logo; // Get logo for this cell if it exists
                     grid.push(
                         <div
@@ -40,9 +46,9 @@ export default function Grid() {
         createGrid();
     }, [width, height, clickedCells]); // Include clickedCells in the dependency array
 
-    const handleCellClick = (cellIndex) => {
+    const handleCellClick = (cellIndex: number) => {
         // Find the selected logo URL from localStorage
-        const logoURL = localStorage.getItem('logo');
+        const logoURL = localStorage.getItem('logo')
         if (logoURL) {
             // Update clickedCells array with the new logo information for the clicked cell
             setClickedCells((prevClickedCells) => [
@@ -52,5 +58,7 @@ export default function Grid() {
         }
     };
 
-    return <div className="grid-container">{cells}</div>;
+    return <div className="grid-container">{cells}</div>
 }
+
+export default Grid

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useRef, ChangeEvent, FormEvent } from 'react'
-import Tabs from "./Tabs"
+import Tabs from './Tabs'
 import Grid from './Grid'
 
 export default function Workspace() {
