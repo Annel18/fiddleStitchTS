@@ -79,12 +79,14 @@ export default function ToolBox() {
                     </button>
                 ))}
             </div>
-            {showColorPicker && (
+            <div className='colorModal'>
+                {showColorPicker && (
                     <ColorPicker
-                    color={color}
-                    onChange={handleColorChange}
-                />
-            )}
+                        color={color}
+                        onChange={handleColorChange}
+                    />
+                )}
+            </div>
         </section>
     )
 }
