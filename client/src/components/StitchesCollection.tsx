@@ -53,7 +53,7 @@ export default function StitchesCollection() {
 
     function handleClick(stitch: { title?: string; abreviation?: string; category?: string; logo: any }) {
         localStorage.setItem("logo", stitch.logo)
-        console.log(stitch.logo)
+        // console.log(stitch.logo)
     }
 
 
