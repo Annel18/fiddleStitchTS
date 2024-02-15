@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react'
 
 export default function Grid() {
-    
+
     interface Cell {
         cellIndex: number
         logo: string
@@ -41,9 +41,9 @@ export default function Grid() {
                 }
             }
             setCells(grid)
-        };
+        }
 
-        createGrid();
+        createGrid()
     }, [width, height, clickedCells]) // Include clickedCells in the dependency array
 
     const handleCellClick = (cellIndex: number) => {
@@ -54,9 +54,13 @@ export default function Grid() {
             setClickedCells((prevClickedCells) => [
                 ...prevClickedCells.filter((cell) => cell.cellIndex !== cellIndex), // Remove existing entry for this cell if it exists
                 { cellIndex, logo: logoURL }, // Add new entry for this cell
-            ]);
+            ])
         }
-    };
+    }
 
-    return <div className="grid-container">{cells}</div>
+    return (
+        <div className="grid-container">
+            {cells}
+        </div>
+    )
 }
