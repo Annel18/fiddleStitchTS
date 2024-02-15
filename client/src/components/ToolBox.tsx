@@ -1,3 +1,8 @@
+import { useState } from 'react'
+import { ColorPicker, useColor } from 'react-color-palette'
+import { IColor } from 'react-color-palette'
+import "react-color-palette/css"
+
 import Array from '../assets/toolBoxIcon/Array.svg'
 import ArrowSelect from '../assets/toolBoxIcon/ArrowSelect.svg'
 import Colour from '../assets/toolBoxIcon/Colour.svg'
@@ -16,6 +21,7 @@ import Ungroup from '../assets/toolBoxIcon/Ungroup.svg'
 import Unlock from '../assets/toolBoxIcon/Unlock.svg'
 import ZoomIn from '../assets/toolBoxIcon/ZoomIn.svg'
 import ZoomOut from '../assets/toolBoxIcon/ZoomOut.svg'
+
 
 export default function ToolBox() {
 
@@ -39,6 +45,24 @@ export default function ToolBox() {
         { title: 'ZoomOut', icon: ZoomOut },
         { title: 'Comment', icon: Comment },
     ]
+    const [showColorPicker, setShowColorPicker] = useState(false);
+    const [color, setColor] = useColor('#fff')
+
+    function handleColorChange(newColor: IColor) {
+        setColor(newColor);
+        localStorage.setItem("backgroundColour", newColor.hex); // Save the selected color to localStorage
+    }
+
+    function handleClick(tool: { title: string }) {
+        if (tool.title === 'Colour') {
+            // Show the ColorPicker component
+            setShowColorPicker(true);
+        } else {
+            // Hide the ColorPicker component and remove background color from localStorage
+            setShowColorPicker(false);
+            localStorage.removeItem("backgroundColour");
+        }
+    }
 
     return (
         <section id="primary-header">
@@ -48,20 +72,19 @@ export default function ToolBox() {
                 <div></div>
             </div>
             <div className="toolBox">
-                {toolBox.
-                    map((tool, i) => {
-                        return (
-                            <button className="tool" key={i}>
-                                <img className="toolBoxIcon" src={tool.icon} alt={tool.title} title={tool.title} />
-                                <p className="toolBoxTitle">{tool.title}</p>
-                            </button>
-                        )
-                    })
-                }
+                {toolBox.map((tool, i) => (
+                    <button className="tool" key={i} onClick={() => handleClick(tool)}>
+                        <img className="toolBoxIcon" src={tool.icon} alt={tool.title} title={tool.title} />
+                        <p className="toolBoxTitle">{tool.title}</p>
+                    </button>
+                ))}
             </div>
-            {/* <div className="hamburgerMenu">
-                <h1>+</h1>
-            </div> */}
+            {showColorPicker && (
+                    <ColorPicker
+                    color={color}
+                    onChange={handleColorChange}
+                />
+            )}
         </section>
     )
 }
