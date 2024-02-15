@@ -18,19 +18,19 @@
     background-color: $primary-fill-color;
 }
 
-canvas{
-    position: absolute;
-    display: inline-block;
-    // vertical-align: baseline;
-    width: 100%;
-    height: -webkit-fill-available;
-    // aspect-ratio: auto;
-    // border: 1px solid black;
-    overflow-clip-margin: content-box;
-    overflow: clip;
-    cursor: default;
-    background-color: $primary-fill-color;
-}
+// canvas{
+//     position: absolute;
+//     display: inline-block;
+//     // vertical-align: baseline;
+//     width: 100%;
+//     height: -webkit-fill-available;
+//     // aspect-ratio: auto;
+//     // border: 1px solid black;
+//     overflow-clip-margin: content-box;
+//     overflow: clip;
+//     cursor: default;
+//     background-color: $primary-fill-color;
+// }
 
 #instruction-space{
     // border: 1px solid black;

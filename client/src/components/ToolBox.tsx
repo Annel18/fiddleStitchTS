@@ -51,15 +51,16 @@ export default function ToolBox() {
     function handleColorChange(newColor: IColor) {
         setColor(newColor);
         localStorage.setItem("backgroundColour", newColor.hex); // Save the selected color to localStorage
+        // setShowColorPicker(false)
     }
 
     function handleClick(tool: { title: string }) {
         if (tool.title === 'Colour') {
-            // Show the ColorPicker component
-            setShowColorPicker(true);
+            // Show/hide the ColorPicker component
+            showColorPicker? setShowColorPicker(false): setShowColorPicker(true)
         } else {
             // Hide the ColorPicker component and remove background color from localStorage
-            setShowColorPicker(false);
+            setShowColorPicker(false)
             localStorage.removeItem("backgroundColour");
         }
     }

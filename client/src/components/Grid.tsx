@@ -30,7 +30,8 @@ export default function Grid() {
                             className="cell"
                             style={{
                                 width: cellSize,
-                                aspectRatio: 1,
+                                maxHeight: cellSize,
+                                aspectRatio:1,
                                 border: '1px solid #000',
                                 backgroundColor: cellBackgroundColor || undefined, // Apply background color if it exists
                                 textAlign: 'center',
@@ -38,7 +39,7 @@ export default function Grid() {
                             }}
                             onClick={() => handleCellClick(cellIndex)} // Add onClick handler
                         >
-                            {cellLogo && <img src={cellLogo} alt="svg" style={{ width: '100%', height: '100%' }} />}
+                            {cellLogo && <img src={cellLogo} alt="svg" style={{ maxHeight:'94%'}} />}
                             {/* Optionally add content inside each cell */}
                         </div>
                     )
