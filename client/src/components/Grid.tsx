@@ -1,23 +1,25 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState, useEffect } from 'react'
 
-export default function Grid() {
+interface GridProps {
+    width: number;
+    height: number;
+}
+
+export default function CustomGrid({ width, height }: GridProps) {
 
     interface Cell {
         cellIndex: number;
         logo: string | null; // Allow logo to be null
         backgroundColor: string | null; // Allow backgroundColor to be null
     }
-    
-    const [width, setWidth] = useState<number>(20)
-    const [height, setHeight] = useState<number>(20)
+
     const [cells, setCells] = useState<JSX.Element[]>([])
     const [clickedCells, setClickedCells] = useState<Cell[]>([])
+    const cellSize = '100px'//`${100 / width}%` // Ensure cells are square
 
     useEffect(() => {
         const createGrid = () => {
             const grid: JSX.Element[] = []
-            const cellSize = `${100 / width}%` // Ensure cells are square
             for (let i = 0; i < height; i++) {
                 for (let j = 0; j < width; j++) {
                     const cellIndex = i * width + j
@@ -31,15 +33,15 @@ export default function Grid() {
                             style={{
                                 width: cellSize,
                                 maxHeight: cellSize,
-                                aspectRatio:1,
-                                border: '1px solid #000',
+                                aspectRatio: 1,
+                                border: `1px solid #000`,
                                 backgroundColor: cellBackgroundColor || undefined, // Apply background color if it exists
                                 textAlign: 'center',
                                 cursor: 'pointer',
                             }}
                             onClick={() => handleCellClick(cellIndex)} // Add onClick handler
                         >
-                            {cellLogo && <img src={cellLogo} alt="svg" style={{ maxHeight:'94%'}} />}
+                            {cellLogo && <img src={cellLogo} alt="svg" style={{ width:'95%', height:'95%' }} />}
                             {/* Optionally add content inside each cell */}
                         </div>
                     )
@@ -47,10 +49,10 @@ export default function Grid() {
             }
             setCells(grid)
         }
-        
+
         createGrid()
     }, [width, height, clickedCells]) // Include clickedCells in the dependency array
-    
+
     const handleCellClick = (cellIndex: number) => {
         // Find the selected logo URL from localStorage
         const logoURL = localStorage.getItem('logo')
@@ -65,7 +67,8 @@ export default function Grid() {
     }
 
     return (
-        <div className="grid-container">
+        <div className="grid-container" style={{ position:'absolute', width:`calc(${cellSize} * ${width})`}}>
+
             {cells}
         </div>
     )

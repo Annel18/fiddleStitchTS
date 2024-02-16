@@ -1,9 +1,13 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useRef, ChangeEvent, FormEvent } from 'react'
-import Tabs from './Tabs'
-import Grid from './Grid'
+import CustomGrid from './Grid'
 
-export default function Workspace() {
+interface GridProps {
+    width: number
+    height: number
+}
+
+export default function GridComponent({ width, height }: GridProps) {
+
     const [inputs, setInputs] = useState<{ [key: string]: string }>({})
     const [panOffset, setPanOffset] = useState<{ x: number; y: number }>({ x: 0, y: 0 })
     const [zoomScale, setZoomScale] = useState<number>(1)
@@ -37,21 +41,21 @@ export default function Workspace() {
         event.preventDefault()
         const formData = new FormData(event.currentTarget)
         const json: { [key: string]: string } = {}
-        
+
         // Convert FormDataEntryValue to string
         formData.forEach((value, key) => {
             json[key] = String(value)
         })
-    
+
         setInputs(json)
     }
 
     return (
-        <section id="hero">
-            <Tabs />
+        <>
+            {/* <Tabs /> */}
             <div id="work-space" ref={workspaceRef} onMouseMove={handlePan} onWheel={handleZoom}>
                 <div style={{ transform: `translate(${panOffset.x}px, ${panOffset.y}px) scale(${zoomScale})` }}>
-                    <Grid />
+                    <CustomGrid width={width} height={height} />
                 </div>
             </div>
             <div id="secondary-header">
@@ -61,6 +65,6 @@ export default function Workspace() {
                 <label hidden htmlFor="instructions">instructions</label>
                 <textarea name="instructions" placeholder='Type your Instructions' value={inputs.instructions || ''} onChange={handleChange} required />
             </form>
-        </section>
+        </>
     )
 }
